@@ -13,7 +13,7 @@ class BeaNipaClient:
             timeout=timeout, headers={"Content-Type": "application/json"}
         )
 
-    async def get(self, endpoint: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    async def get(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Make a HTTP GET request to the API with unified error handling"""
         try:
             response = await self.client.request("GET", self.BEA_API_URL, params=params)
