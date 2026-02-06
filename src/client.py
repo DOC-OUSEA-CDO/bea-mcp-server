@@ -1,7 +1,9 @@
+import os
+import httpx
+from dotenv import load_dotenv
 from typing import Any, Dict, Optional
 
-import httpx
-
+load_dotenv()
 
 class BeaNipaClient:
     """Shared HTTP client for the BEA API, narrowed down to just the NIPA tables"""
@@ -16,6 +18,8 @@ class BeaNipaClient:
     async def get(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Make a HTTP GET request to the API with unified error handling"""
         try:
+            if params:
+                params["userID"] = f"{os.getenv('API_KEY')}"
             response = await self.client.request("GET", self.BEA_API_URL, params=params)
             response.raise_for_status()
             return response.json()

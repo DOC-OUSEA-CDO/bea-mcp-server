@@ -1,9 +1,5 @@
 import asyncio
-import os
-from dotenv import load_dotenv
 from client import BeaNipaClient
-
-load_dotenv()
 
 async def get_GDP_percent_change_annual_and_quarterly(client: BeaNipaClient, year: str):
     """
@@ -20,7 +16,6 @@ async def get_GDP_percent_change_annual_and_quarterly(client: BeaNipaClient, yea
     try:
         # build the params dictionary
         params = {
-            "userID": f"{os.getenv('API_KEY')}",
             "method": "getData",
             "datasetName": "NIPA",
             "tableName": "T10101",
@@ -29,7 +24,10 @@ async def get_GDP_percent_change_annual_and_quarterly(client: BeaNipaClient, yea
         }
         
         response = await client.get(params=params)
-        return response
+        
+        # extract, then return the "Results" portion of the raw API response
+        results = response["BEAAPI"]["Results"]
+        return results
     except Exception as e:
         return e
 
