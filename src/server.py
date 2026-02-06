@@ -4,6 +4,7 @@ import logging
 from fastmcp import FastMCP
 from client import BeaNipaClient
 from tools.get_table_names import register_table_name_tools
+from tools.get_valid_parameters import register_parameter_lookup_tools
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +59,7 @@ async def async_main():
         # Register tools
         logger.info("Registering tools")
         register_table_name_tools(mcp, client)
+        register_parameter_lookup_tools(mcp, client)
 
         logger.info("Running BEA NIPA MCP Server")
         await mcp.run_async()
