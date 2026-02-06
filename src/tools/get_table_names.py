@@ -21,8 +21,9 @@ def register_table_name_tools(mcp: FastMCP, client: BeaNipaClient):
         try:
             # build the params dictionary
             params = {
-                "method": "GetParameterList",
-                "datasetName": "NIPA"
+                "method": "getParameterValues",
+                "datasetName": "NIPA",
+                "parameterName": "tableName"
             }
             
             # make API call
