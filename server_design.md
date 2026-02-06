@@ -12,11 +12,15 @@ Different tables accept different ranges of values for the two remaining paramet
 table. To provide the server with this knowledge, we will need to create two tools, get_available_frequencies() and get_available_years() that return a list of valid parameter values for each respective parameter given the TableName.
 
 ### Retrieve Table Data
-Once the server decides on all three parameter values, it has everything it needs to retrieve the data. Create a tool, get_table_data() that issues the appropriate API call, cleans/wrangles the json response, and returns it to the server.
+Once the server decides on all three parameter values, it has everything it needs to retrieve the data. Create a tool, get_table_data(), that issues the appropriate API call, cleans/wrangles the json response, and returns it to the server.
 
 ## Control Flow
 1. The server should always start by attempting to identify the appropriate table to retrieve data from. This will most likely entail calling the get_table_names() tool.
 2. Once it has identified the target table and its associated TableName, the server should try to determine the appropriate values for the remaining parameters: Frequency and Year
-  1. **Note:** since we are only focusing on the NIPA tables for now, we don't have to worry about other parameters in the API like GeoFips or Industry codes.
-  2. To ensure it doesn't use invalid parameter values, the server should most likely call the get_available_frequencies() and/or get_available_years() tools.
+    1. **Note:** since we are only focusing on the NIPA tables for now, we don't have to worry about other parameters in the API like GeoFips or Industry codes.
+    2. To ensure it doesn't use invalid parameter values, the server should most likely call the get_available_frequencies() and/or get_available_years() tools.
 3. Now that the server has all three parameter values, it can retrieve the data by calling the get_table_data() tool.  
+
+## Misc
+
+**Note:** There is an additional parameter, ResultFormat, that is valid for all API calls and determines the format of the API response. Valid options are "JSON" and "XML" and the default value is "JSON."
