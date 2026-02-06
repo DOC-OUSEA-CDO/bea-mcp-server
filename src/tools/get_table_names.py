@@ -33,5 +33,5 @@ def register_table_name_tools(mcp: FastMCP, client: BeaNipaClient):
             return results
 
         except Exception as e:
-            return f"Error fetching agencies: {str(e)}"
+            return f"Error fetching NIPA table information: {str(e)}"
 
